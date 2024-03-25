@@ -1,13 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
-import SignUp from "./components/SignUp/SignUp";
-import Login from "./components/login/Login";
+import UserProfile from './components/UserProfile/UserProfile';
+import UserLandingPage from './components/UserLandingPage/UserLandingPage';
 
 function App() {
   return (
     <div className="App">
-      <SignUp />
-      {/* <Login /> */}
+        {/* <UserProfile /> */}
+        <UserLandingPage />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Styles from "./Login.css";
 import Email from "../../img/email.svg";
 import Password from "../../img/password.svg";
+import axios from "axios";
 
 function Login() {
     const [printedSlogan, setPrintedSlogan] = useState("");
@@ -20,6 +21,22 @@ function Login() {
         return () => clearInterval(interval);
     }, [currentIndex]);
 
+    async function sendData() {
+
+        var name = document.getElementById("name").value
+        var pwd = document.getElementById("pwd").value
+
+        await axios({
+            url:"http://localhost:3001/storedata",
+            method: "get",
+            params: {name, pwd}
+        }).then((res => {
+            if (res.data.success) {
+                alert("data stored successfully")
+            }
+        }))
+    }
+
     return (
         <div className="LoginContainer">
             <div className="LoginSlogan">
@@ -31,14 +48,14 @@ function Login() {
                 </div>
                 <div className="Username">
                     <img src={Email} alt="Username" style={{ height: "50px", width: "50px" }} />
-                    <input type="text" placeholder="Username" style={{ width: "400px", height: "50px", border: "transparent", backgroundColor: "white", outline: "none" }} />
+                    <input type="text" id="name" placeholder="Username" style={{ width: "400px", height: "50px", border: "transparent", backgroundColor: "white", outline: "none" }} />
                 </div>
                 <div className="Password">
                     <img src={Password} alt="Username" style={{ height: "50px", width: "50px" }} />
-                    <input type="password" placeholder="Password" style={{ width: "400px", height: "50px", border: "transparent", outline: "none" }} />
+                    <input type="password" id="pwd" placeholder="Password" style={{ width: "400px", height: "50px", border: "transparent", outline: "none" }} />
                 </div>
                 <div className="LoginButton">
-                    <button style={{ width: "400px", height: "35px", color: "white", backgroundColor: "#080a47", borderRadius: "5px", marginLeft: "50px" }}>Login</button>
+                    <button onClick={sendData}   style={{ width: "400px", height: "35px", color: "white", backgroundColor: "#080a47", borderRadius: "5px", marginLeft: "50px" }}>Login</button>
                 </div>
                 <div className="LoginOthers">
                     <input type="checkbox" />I Agree to Terms and Conditions
@@ -47,6 +64,7 @@ function Login() {
                     </div>
                     <a href="#" style={{ textDecoration: "none", color: "black" }}> Forgot Password </a>
                 </div>
+                <p>Don't have an account ? <a href="/signup">Signup here</a></p>
             </div>
         </div>
     );

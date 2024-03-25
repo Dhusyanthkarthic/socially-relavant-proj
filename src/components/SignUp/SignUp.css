@@ -77,12 +77,13 @@
     font-weight: 700;
 }
 
-
+.Services,
 .NGOName{
     display: flex;
     gap : 10px;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .UName{

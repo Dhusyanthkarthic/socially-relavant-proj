@@ -1,12 +1,12 @@
 .HostHeaderContainer{
     display: flex;
-    gap : 90px;
+    gap : 40px;
     font-family: 'poppins','sans-serif';
     align-items: center;
 }
 
 .HostHeaderTitle{
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
 .HostHeaderNavigator{

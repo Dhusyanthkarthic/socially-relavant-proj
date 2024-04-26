@@ -4,6 +4,7 @@ import HomePageHighlight from "../HostHighlightPage/HostHighlightPage"
 import Service from "../Service/Service"
 import HomeFeatures from "../HostFeatures/HostFeatureContent"
 import Benefits from "../benefits/benefits";
+import {Cookies} from "react-cookie"
 import Footer from "../Footer/Footer"
 
 function hostlandingpage(){

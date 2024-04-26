@@ -1,8 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/login/Login";
-import HostLandingPage from "./components/hostlandingpage/hostlandingpage"
+import HostLandingPage from "./components/hostlandingpage/hostlandingpage";
+import UserLandingPage from "./components/UserLandingPage/UserLandingPage";
+import UserProfile from './components/UserProfile/UserProfile';
+import UserHeader from './components/UserHeader/Userheader';
+import Footer from './components/Footer/Footer';
+import ProblemComposer from "./components/ProblemComposer/ProblemComposer";
+import ComposedProblems from "./components/UserProblemDisplay/UserProblemDisplay";
+import ProblemDescription from './components/ProblemDescription/ProblemDescripiton';
+import HostProblemFeed from'./components/HostProblemFeed/HostProblemFeed';
+
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,6 +29,38 @@ const router = createBrowserRouter([
   {
     path: "/host",
     element: <HostLandingPage />
+  },
+  {
+    path : "/userlandingpage",
+    element : <UserLandingPage />
+  },
+  {
+    path : "/userprofile",
+    element : <UserProfile />
+  },
+  {
+    path : "/userheader",
+    element : <UserHeader />
+  },
+  {
+    path : "/footer",
+    element : <Footer />
+  },
+  {
+    path : "/problemcomposer",
+    element : <ProblemComposer />
+  },
+  {
+    path : '/composedproblems',
+    element : <ComposedProblems />
+  },
+  {
+    path : "/problemdescription",
+    element : <ProblemDescription />
+  },
+  {
+    path : "/hostfeed",
+    element : <HostProblemFeed />
   }
 ]);
 

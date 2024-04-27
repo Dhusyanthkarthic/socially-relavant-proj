@@ -464,7 +464,7 @@ function SignUp() {
                                                         <option value="Humanitarian ">Humanitarian</option>
                                                         <option value="Healthcare">Healthcare</option>
                                                         <option value="Education ">Education </option>
-                                                        <option value="Environmental ">Environmental </option>
+                                                        <option value="Environmental ">Education </option>
                                                         <option value="Community ">Community </option>
                                                         <option value="Human Rights ">Human Rights </option>
                                                         <option value="Empowerment Programs ">Empowerment Programs </option>

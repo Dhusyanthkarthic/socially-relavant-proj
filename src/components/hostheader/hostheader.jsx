@@ -23,7 +23,10 @@ function HostHeader() {
                     <a href="./hostfeed" style={{textDecoration : "none", color : "black"}} ><p>Problems</p></a>
                 </div>
                 <div>
-                    <a href="#" style={{textDecoration : "none", color : "black"}} ><p>Analysis</p></a>
+                    <a href="/HostAnalysis" style={{textDecoration : "none", color : "black"}} ><p>Analysis</p></a>
+                </div>
+                <div>
+                    <a href="./problemstatus" style={{textDecoration : "none", color : "black"}} ><p>Status</p></a>
                 </div>
                 <div>
                     <a href="#" style={{textDecoration : "none", color : "black"}} ><p>Profile</p></a>

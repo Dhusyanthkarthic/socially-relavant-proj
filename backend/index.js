@@ -351,6 +351,14 @@ const ProblemsComposed = new mongoose.Schema({
     ProblemStatus : {
         type : String,
         required : true
+    },
+    HostStatus : {
+        type : String,
+        required : true
+    },
+    NGOName : {
+        type : String,
+        required : true
     }
 })
 
@@ -364,19 +372,141 @@ app.get("/storeComposedProblems" , async (req, res) => {
     var description = req.query.description;
     var filename = req.query.filename;
     var ProblemStatus = req.query.ProblemStatus;
+    var HostStatus = "none";
+    var NGOName = "none";
 
-    const Problem = new ProblemCollection({ProblemHeading : ProblemHeading, area : area, service : service, user : user, description : description, filename : filename, ProblemStatus : ProblemStatus });
+    const Problem = new ProblemCollection({ProblemHeading : ProblemHeading, area : area, service : service, user : user, description : description, filename : filename, ProblemStatus : ProblemStatus, HostStatus : HostStatus, NGOName : NGOName });
     await Problem.save()
     res.json({success: true})
 })
 
+app.post("/acceptProblem", async (req, res) => {
+    const problemId = req.query.problemId;
+    const NGOName = req.query.NGOname;
+
+    try {
+        const problem = await ProblemCollection.findById(problemId);
+        if (!problem) {
+            return res.status(404).json({ success: false, message: "Problem not found" });
+        }
+
+        problem.HostStatus = "Accept";
+        problem.ProblemStatus = "pending";
+        problem.NGOName = NGOName;
+
+        await problem.save();
+
+        res.status(200).json({ success: true, message: "Problem accepted successfully" });
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
+app.post("/CompletedProblem", async (req, res) => {
+    const problemId = req.query.problemId;
+    const NGOName = req.query.NGOname;
+
+    try {
+        const problem = await ProblemCollection.findById(problemId);
+        if (!problem) {
+            return res.status(404).json({ success: false, message: "Problem not found" });
+        }
+
+        problem.HostStatus = "Accept";
+        problem.ProblemStatus = "completed";
+        problem.NGOName = NGOName;
+
+        await problem.save();
+
+        res.status(200).json({ success: true, message: "Problem accepted successfully" });
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+})
+
+
 app.get("/getPendingProblems", async (req, res) => {
+    const NGOName = req.query.user;
     try {
       const pendingProblems = await ProblemCollection.find({ ProblemStatus: "0" });
       res.json(pendingProblems);
     } catch (error) {
       console.error("Error fetching pending problems:", error);
       res.status(500).json({ error: "Failed to fetch pending problems" });
+    }
+});
+
+app.get("/getUserComposedProblems", async (req, res) => {
+    const user = req.query.user;
+    try{
+        const UserProblems = await ProblemCollection.find({ user : user });
+        res.json(UserProblems);
+        console.log(user);
+    } catch( error ){
+        console.error("Error fetching pending problems:", error);
+        res.status(500).json({ error: "Failed to fetch pending problems" });
+    }
+});
+
+app.get("/getUserPendingProblems", async (req, res) => {
+    const user = req.query.user;
+    const ProblemStatus = "pending";
+    try{
+        const UserProblems = await ProblemCollection.find({ user : user , ProblemStatus });
+        res.json(UserProblems);
+        console.log(user);
+    } catch( error ){
+        console.error("Error fetching pending problems:", error);
+        res.status(500).json({ error: "Failed to fetch pending problems" });
+    }
+});
+
+app.get("/getCompletedProblemUser", async (req, res) => {
+    const user = req.query.user;
+    const ProblemStatus = "completed";
+    try{
+        const UserProblems = await ProblemCollection.find({ user : user , ProblemStatus });
+        res.json(UserProblems);
+        console.log(user);
+    } catch( error ){
+        console.error("Error fetching pending problems:", error);
+        res.status(500).json({ error: "Failed to fetch pending problems" });
+    }
+});
+
+app.get("/pendingproblems", async (req, res) => {
+    const NGOName = req.query.user;
+    try{
+        const pendingProblems = await ProblemCollection.find({ProblemStatus : "pending"});
+        res.json(pendingProblems);
+    }catch(error){
+        console.error("Error in fetching the pending problems");
+        res.status(500).json({error : "Failed to fetch pending problems"});
+    }
+});
+
+app.get("/getHostPendingProblems", async (req, res) => {
+    const NGOName = req.query.NGOName;
+    const ProblemStatus = "pending";
+    try{
+        const pendingProblems = await ProblemCollection.find({ NGOName, ProblemStatus });
+        res.json(pendingProblems);
+    }catch(error){
+        console.log("Backend Error : " + error);
+        // res.status(500).json({"Failed to fetch pending problems"});
+    }
+});
+
+app.get("/getHostCompletedProblems", async (req, res) => {
+    const NGOName = req.query.NGOName;
+    const ProblemStatus = "completed";
+    try{
+        const pendingProblems = await ProblemCollection.find({ NGOName, ProblemStatus });
+        res.json(pendingProblems);
+    }catch(error){
+        console.log("Backend Error : " + error);
     }
 });
 

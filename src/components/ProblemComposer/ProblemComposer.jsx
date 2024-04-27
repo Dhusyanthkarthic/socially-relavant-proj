@@ -10,18 +10,22 @@ import Description  from "../../img/description.svg";
 import UploadImage from "../../img/upload.svg";
 import { useState } from "react";
 import axios from "axios";
+import { Cookies } from "react-cookie";
+const cookie = new Cookies();
+
 
 function ProblemComposer(){
     const [file, setFile] = useState(null);
-
+    const username = cookie.get("Username");
     async function handleProblems(){
         var ProblemHeading = document.getElementById("Problem").value;
         var area = document.getElementById("Area").value;
         var service = document.getElementById("services").value;
-        var user = "hari";
+        var user = username;
         var description = document.getElementById("description").value;
         const filename = file ? file.name : "";
         var ProblemStatus = 0;
+        
         console.log("Selected File:", file);
 
         await axios({

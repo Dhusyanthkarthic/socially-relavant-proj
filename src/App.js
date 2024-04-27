@@ -10,12 +10,16 @@ import ProblemComposer from "./components/ProblemComposer/ProblemComposer";
 import ComposedProblems from "./components/UserProblemDisplay/UserProblemDisplay";
 import ProblemDescription from './components/ProblemDescription/ProblemDescripiton';
 import HostProblemFeed from'./components/HostProblemFeed/HostProblemFeed';
+import ProblemStatus from "./components/ProblemStatus/ProblemStatus";
+import CompletedProblems from "./components/ProblemStatus/CompletedStatus";
+import HostAnalysis from "./components/HostAnalysisPage/HostAnalysisPage";
 
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
 
 const router = createBrowserRouter([
   {
@@ -61,6 +65,18 @@ const router = createBrowserRouter([
   {
     path : "/hostfeed",
     element : <HostProblemFeed />
+  },
+  {
+    path : "/problemstatus",
+    element : <ProblemStatus />
+  },
+  {
+    path : "/completedstatus",
+    element : <CompletedProblems />
+  },
+  {
+    path : "/HostAnalysis",
+    element : <HostAnalysis />
   }
 ]);
 

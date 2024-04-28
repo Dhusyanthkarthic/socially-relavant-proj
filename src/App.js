@@ -13,6 +13,8 @@ import HostProblemFeed from'./components/HostProblemFeed/HostProblemFeed';
 import ProblemStatus from "./components/ProblemStatus/ProblemStatus";
 import CompletedProblems from "./components/ProblemStatus/CompletedStatus";
 import HostAnalysis from "./components/HostAnalysisPage/HostAnalysisPage";
+import AboutUs from "./components/AboutUs/AboutUs";
+import UserAnalysis from "./components/UserAnalysis/UserAnalysis";
 
 
 import {
@@ -77,6 +79,14 @@ const router = createBrowserRouter([
   {
     path : "/HostAnalysis",
     element : <HostAnalysis />
+  },
+  {
+    path : "/AboutUs",
+    element : <AboutUs />
+  },
+  {
+    path : "/UserAnalysis",
+    element : <UserAnalysis />
   }
 ]);
 

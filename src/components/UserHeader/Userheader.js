@@ -52,8 +52,8 @@ const Navbar = () => {
       <div className="navbar-links-container">
         <a href="">Messages</a>
         <a href="./problemcomposer">Problems</a>
-        <a href="">Analysis</a>
-        <a href="">About Us</a>
+        <a href="/UserAnalysis">Analysis</a>
+        <a href="/AboutUs">About Us</a>
         
         <button className="primary-button">
           <div><img src={User} alt="user" height="18px" width = "18px" /></div>

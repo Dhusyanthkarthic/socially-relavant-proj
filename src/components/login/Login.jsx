@@ -102,10 +102,10 @@ function Login() {
                     <input type="password" id="pwd" placeholder="Password" style={{ width: "400px", height: "50px", border: "transparent", outline: "none" }} />
                 </div>
                 <div className="LoginButton">
-                    <button onClick={sendData} style={{ width: "400px", height: "35px", color: "white", backgroundColor: "#080a47", borderRadius: "5px", marginLeft: "50px" }}>Login</button>
+                    <button onClick={sendData} style={{ width: "400px", height: "35px", color: "white", backgroundColor: "#4d82e2", borderRadius: "5px", marginLeft: "50px" }}>Login</button>
                 </div>
                 <div className="LoginOthers">
-                    <input type="checkbox" />I Agree to Terms and Conditions
+                    <a href="/TermsConditions" style={{textDecoration : "none", color : "black"}}><input type="checkbox" required/>I Agree to Terms and Conditions</a>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "7px" }}>
                         <p>Didn't Have an account?</p><a href="../SignUp/SignUp.jsx" style={{ textDecoration: "none", color: "black" }}>Register Now!</a>
                     </div>

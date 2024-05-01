@@ -27,8 +27,8 @@ function Footer() {
                         <div>
                             <p>Support</p>
                             <p>Contact Us</p>
-                            <p>Terms & Conditions</p>
-                            <p>Privacy & Policy </p>
+                            <a href="/TermsConditions" style={{textDecoration : "none", color : "black"}}><p>Terms & Conditions</p></a>
+                            <a href="/PrivacyPolicy" style={{textDecoration : "none", color : "black"}}><p>Privacy & Policy </p></a>
                         </div>
                     </div>
                     <div style={{lineHeight : "1", textAlign : "center"}}>

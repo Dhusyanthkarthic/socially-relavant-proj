@@ -51,14 +51,15 @@ const Navbar = () => {
       </a>
       <div className="navbar-links-container">
         <a href="">Messages</a>
-        <a href="./problemcomposer">Problems</a>
+        <a href="./problemcomposer">Composer</a>
+        <a href="/composedproblems">Composed</a>
         <a href="/UserAnalysis">Analysis</a>
         <a href="/AboutUs">About Us</a>
         
-        <button className="primary-button">
+        <a href="/UserProfilePage"><button className="primary-button">
           <div><img src={User} alt="user" height="18px" width = "18px" /></div>
           <div>{username}</div>
-        </button>
+        </button></a>
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />

@@ -232,73 +232,73 @@ function HostAnalysis() {
                 <li class="table-row">
                     <div class="col col-1" data-label="Job Id">1</div>
                     <div class="col col-2" data-label="Customer Name">Humanitarian</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">2</div>
                     <div class="col col-2" data-label="Customer Name">Healthcare</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">3</div>
                     <div class="col col-2" data-label="Customer Name">Education</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">4</div>
                     <div class="col col-2" data-label="Customer Name">Environmental</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">5</div>
                     <div class="col col-2" data-label="Customer Name">Community</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">6</div>
                     <div class="col col-2" data-label="Customer Name">Human Rights</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">7</div>
                     <div class="col col-2" data-label="Customer Name">Empowerment Programs</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">8</div>
                     <div class="col col-2" data-label="Customer Name">Disaster Preparedness </div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">9</div>
                     <div class="col col-2" data-label="Customer Name">Research and Policy Advocacy</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">10</div>
                     <div class="col col-2" data-label="Customer Name">Crisis Intervention</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">11</div>
                     <div class="col col-2" data-label="Customer Name">Awareness Campaigns </div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
                     <li class="table-row">
                     <div class="col col-1" data-label="Job Id">12</div>
                     <div class="col col-2" data-label="Customer Name">Conflict Resolution</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
+                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 3) + 1}</div>
                     
                     </li>
               </ul>

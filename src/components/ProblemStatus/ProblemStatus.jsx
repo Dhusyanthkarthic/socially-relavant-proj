@@ -63,7 +63,7 @@ function ProblemStatus() {
             </div>
             <div className="FeedContainer">
                 <div>
-                    <h1 style={{ textAlign: "left" }}>Problems Feed :</h1>
+                    <h1 style={{ textAlign: "left" }}>Pending Problems :</h1>
                 </div>
                 {problems.length > 0 ? (
                     problems.map((problem, index) => (

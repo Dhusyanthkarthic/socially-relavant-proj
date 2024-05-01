@@ -3,7 +3,6 @@ import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/login/Login";
 import HostLandingPage from "./components/hostlandingpage/hostlandingpage";
 import UserLandingPage from "./components/UserLandingPage/UserLandingPage";
-import UserProfile from './components/UserProfile/UserProfile';
 import UserHeader from './components/UserHeader/Userheader';
 import Footer from './components/Footer/Footer';
 import ProblemComposer from "./components/ProblemComposer/ProblemComposer";
@@ -15,6 +14,11 @@ import CompletedProblems from "./components/ProblemStatus/CompletedStatus";
 import HostAnalysis from "./components/HostAnalysisPage/HostAnalysisPage";
 import AboutUs from "./components/AboutUs/AboutUs";
 import UserAnalysis from "./components/UserAnalysis/UserAnalysis";
+import UserProfile from "./components/UserProfilePage/UserProfile";
+import PrivacyPolicy from "./components/PrivacyPolicy/PandP";
+import TermsConditions from "./components/TermsandConditions/TandC";
+import HostAboutUs from "./components/AboutUsHost/AboutUsHost";
+import HostProfile from "./components/HostProfile/HostProfile";
 
 
 import {
@@ -87,6 +91,26 @@ const router = createBrowserRouter([
   {
     path : "/UserAnalysis",
     element : <UserAnalysis />
+  },
+  {
+    path : "/UserProfilePage",
+    element : <UserProfile />
+  },
+  {
+    path : "/PrivacyPolicy",
+    element : <PrivacyPolicy />
+  },
+  {
+    path : "/TermsConditions",
+    element : <TermsConditions />
+  },
+  {
+    path : "/HostAboutUs",
+    element : <HostAboutUs />
+  },
+  {
+    path : "/HostProfile",
+    element : <HostProfile />
   }
 ]);
 

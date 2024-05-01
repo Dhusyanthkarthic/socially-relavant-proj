@@ -464,7 +464,7 @@ function SignUp() {
                                                         <option value="Humanitarian ">Humanitarian</option>
                                                         <option value="Healthcare">Healthcare</option>
                                                         <option value="Education ">Education </option>
-                                                        <option value="Environmental ">Education </option>
+                                                        <option value="Environmental ">Environmental </option>
                                                         <option value="Community ">Community </option>
                                                         <option value="Human Rights ">Human Rights </option>
                                                         <option value="Empowerment Programs ">Empowerment Programs </option>
@@ -595,7 +595,7 @@ function SignUp() {
                         </form>
                     )}
                     <div style={{marginTop : "10px"}}>
-                        <button onClick={handleSignUp} style={{height : "40px", width : "150px", borderRadius : "10px", backgroundColor : "#3A30BA", color : "white", border: "transparent", fontWeight : "bolder"}}>Sign Up</button>
+                        <button onClick={handleSignUp} style={{height : "40px", width : "150px", borderRadius : "10px", backgroundColor : "#4d82e2", color : "white", border: "transparent", fontWeight : "bolder"}}>Sign Up</button>
                     </div>
                 </div>
             </div>

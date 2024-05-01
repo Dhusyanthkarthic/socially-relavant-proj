@@ -16,9 +16,9 @@ function HostHeader() {
                 </a>
             </div>
             <div className="HostHeaderNavigator">
-                <div>
+                {/* <div>
                     <a href="#" style={{textDecoration : "none", color : "black"}} ><p>Dashboard</p></a>
-                </div>
+                </div> */}
                 <div>
                     <a href="./hostfeed" style={{textDecoration : "none", color : "black"}} ><p>Problems</p></a>
                 </div>
@@ -29,14 +29,18 @@ function HostHeader() {
                     <a href="./problemstatus" style={{textDecoration : "none", color : "black"}} ><p>Status</p></a>
                 </div>
                 <div>
-                    <a href="#" style={{textDecoration : "none", color : "black"}} ><p>Profile</p></a>
+                    <a href="./HostAboutUs" style={{textDecoration : "none", color : "black"}} ><p>About</p></a>
                 </div>
+                
+                {/* <div>
+                    <a href="#" style={{textDecoration : "none", color : "black"}} ><p>Profile</p></a>
+                </div> */}
             </div>
-            <div className="HostHeaderName">
+            <a href="/UserProfilePage" style={{textDecoration : "none", color : "black"}}><div className="HostHeaderName">
                 <p>{NGOName}</p>
-            </div>
+            </div></a>
             <div>
-                <button className="HostDocumentation">Documentation</button>
+                <button className="HostDocumentation">Profile</button>
             </div>
         </div>
     );

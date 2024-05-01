@@ -2,12 +2,20 @@ import React from "react";
 import "./AboutUs.css";
 import Header from "../UserHeader/Userheader";
 import NGOImage from "../../img/ngo-images.jpg";
+import AboutBackground from "../../Assets/about-background.png";
+import BannerBackground from "../../Assets/home-banner-background.png";
 import Footer from "../Footer/Footer";
 
 function AboutUs() {
   return (
     <div>
       <Header />
+      <div className="about-background-image-container">
+        <img src={AboutBackground} alt="" />
+      </div>
+      <div className="home-bannerImage-container">
+        <img src={BannerBackground} alt="" />
+      </div>
       <div className="responsive-container-block bigContainer">
         <div style={{width : "70%", margin : "0 auto"}}>
             <h1 className="text-blk heading" style={{textAlign: "center", color : "#4c4c4c"}}>About Us</h1>
@@ -81,8 +89,8 @@ function AboutUs() {
         </div>
         <div style={{display : "block"}}>
             <div style={{margin : "0 auto", marginBottom : "50px", marginTop : "50px"}}>
-                <a>
-                <button className="explore" style={{marginTop : "30px"}}>Explore our Services</button>
+                <a href="/userlandingpage">
+                <button className="explore" style={{marginTop : "30px", backgroundColor:"#4d82e2"}}>Explore our Services</button>
                 </a>
             </div>
             <div style={{margin : "0 auto", width : "70%", marginBottom : "50px", marginTop : "50px"}}>

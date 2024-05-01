@@ -3,6 +3,7 @@
     gap : 40px;
     font-family: 'poppins','sans-serif';
     align-items: center;
+    width: 100%;
 }
 
 .HostHeaderTitle{
@@ -25,4 +26,5 @@
     background-color: transparent;
     border-radius : 20px;
     font-size : 110%;
+    margin-right :70px;
 }

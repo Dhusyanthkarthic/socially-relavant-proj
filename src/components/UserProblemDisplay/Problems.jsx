@@ -106,7 +106,7 @@ function Problems() {
                 <div key={index}>
                   <div style={{ lineHeight: "0.8" }}>
                     <div className="Pending">
-                      <h2>{problem.ProblemHeading}</h2>
+                      <h2 style={{color : "white"}}>{problem.ProblemHeading}</h2>
                     </div>
                     {/* <div className="problemDescription">
                     <p>{problem.description}</p>
@@ -127,7 +127,7 @@ function Problems() {
                           style={{ height: "23px", width: "23px" }}
                         />
                       </div>
-                      <div>{problem.area}</div>
+                      <div style={{color : "white"}}>{problem.area}</div>
                     </div>
                     <div className="problemServices">
                       <div>
@@ -137,7 +137,7 @@ function Problems() {
                           style={{ height: "23px", width: "23px" }}
                         />
                       </div>
-                      <div>{problem.service}</div>
+                      <div style={{color : "white"}}>{problem.service}</div>
                     </div>
                   </div>
                   <div className="user-info">
@@ -175,7 +175,7 @@ function Problems() {
                 <div key={index}>
                   <div style={{ lineHeight: "0.8" }}>
                     <div className="Pending">
-                      <h2>{problem.ProblemHeading}</h2>
+                      <h2 style={{color : "white"}}>{problem.ProblemHeading}</h2>
                     </div>
                     {/* <div className="problemDescription">
                     <p>{problem.description}</p>
@@ -196,7 +196,7 @@ function Problems() {
                           style={{ height: "23px", width: "23px" }}
                         />
                       </div>
-                      <div>{problem.area}</div>
+                      <div style={{color : "white"}}>{problem.area}</div>
                     </div>
                     <div className="problemServices">
                       <div>
@@ -206,7 +206,7 @@ function Problems() {
                           style={{ height: "23px", width: "23px" }}
                         />
                       </div>
-                      <div>{problem.service}</div>
+                      <div style={{color : "white"}}>{problem.service}</div>
                     </div>
                   </div>
                   <div className="user-info">
@@ -219,8 +219,8 @@ function Problems() {
                         />
                       </div>
                       <div style={{display : "flex", gap : "10px", flexWrap : "wrap", alignItems: "center", justifyContent : "center"}}>
-                        <div style={{ fontSize: "24px" }}>{problem.user}</div>
-                        <div style={{fontSize : "24px"}}><img src={Ngo} alt="ngo" width = "20px" height = "20px"  style={{marginRight : "5px"}}/>{problem.NGOName}</div>
+                        <div style={{ fontSize: "24px", color : "white" }}>{problem.user}</div>
+                        <div style={{fontSize : "24px", color : "white"}}><img src={Ngo} alt="ngo" width = "20px" height = "20px"  style={{marginRight : "5px"}}/>{problem.NGOName}</div>
                       </div>
                     </div>
                   </div>
@@ -247,7 +247,7 @@ function Problems() {
                 <div key={index}>
                   <div style={{ lineHeight: "0.8" }}>
                     <div className="Pending">
-                      <h2>{problem.ProblemHeading}</h2>
+                      <h2 style={{color : "white"}}>{problem.ProblemHeading}</h2>
                     </div>
                     {/* <div className="problemDescription">
                     <p>{problem.description}</p>
@@ -268,7 +268,7 @@ function Problems() {
                           style={{ height: "23px", width: "23px" }}
                         />
                       </div>
-                      <div>{problem.area}</div>
+                      <div style={{color : "white"}}>{problem.area}</div>
                     </div>
                     <div className="problemServices">
                       <div>
@@ -278,7 +278,7 @@ function Problems() {
                           style={{ height: "23px", width: "23px" }}
                         />
                       </div>
-                      <div>{problem.service}</div>
+                      <div style={{color : "white"}}>{problem.service}</div>
                     </div>
                   </div>
                   <div className="user-info">
@@ -291,8 +291,8 @@ function Problems() {
                         />
                       </div>
                       <div style={{display : "flex", gap : "10px", flexWrap : "wrap", alignItems: "center", justifyContent : "center"}}>
-                        <div style={{ fontSize: "24px" }}>{problem.user}</div>
-                        <div style={{fontSize : "24px"}}><img src={Ngo} alt="ngo" width = "20px" height = "20px"  style={{marginRight : "5px"}}/>{problem.NGOName}</div>
+                        <div style={{ fontSize: "24px", color : "white" }}>{problem.user}</div>
+                        <div style={{fontSize : "24px", color : "white"}}><img src={Ngo} alt="ngo" width = "20px" height = "20px"  style={{marginRight : "5px"}}/>{problem.NGOName}</div>
                       </div>
                     </div>
                   </div>

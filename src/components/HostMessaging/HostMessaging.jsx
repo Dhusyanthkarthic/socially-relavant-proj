@@ -44,7 +44,7 @@ function HostMessaging() {
             <div>
                 <h1 style={{textAlign : "left", marginLeft : "30px"}}>Message the user : </h1>
             </div>
-            <div className="MsgHostHolder">
+            <div className="MsgHostHolder" style={{display : "flex", gap : "20px", alignItems : "center", justifyContent : "center", flexWrap : "wrap"}}>
                 {problems.length > 0 ? (
                     problems.map((problem, index) => {
                         return (
@@ -52,7 +52,7 @@ function HostMessaging() {
                                 <div className="HostMessagingContainer">
                                     <div className="HostMessagingContent">
                                         <div className="HostMessagingProfile">
-                                            <img src={Images} alt="Images" width="200px" height="200px" />
+                                            <img src={problem.file_url} alt="Images" width="200px" height="200px" />
                                         </div>
                                         <div className="HostMessagingInfo">
                                             <div className="HostMessagingUserName">

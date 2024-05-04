@@ -8,6 +8,32 @@ import axios from "axios";
 function HostAnalysis() {
   const [service, setService] = useState([]);
   const [analysisType, setAnalysisType] = useState("Overall");
+  const [problems, setProblems] = useState([]);
+
+  useEffect(() => {
+    console.log("happening")
+    fetchData();
+  }, [analysisType]);
+
+  const fetchData = async () => {
+    const cookie = new Cookies();
+    const NGOName = cookie.get("NGOname");
+    console.log("yesss");
+    console.log("NGOname : " + NGOName);
+    try {
+      const response = await axios.get("http://localhost:3001/getServices", {
+        params: { NGOName }
+      });
+      console.log(response.data);
+      if (response.data) {
+        setService(response.data.services);
+      } else {
+        console.log("No pending problems found");
+      }
+    } catch (err) {
+      console.log(err + "error message");
+    }
+  };
 
   const [state1, setState1] = useState({
     series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1],
@@ -51,7 +77,7 @@ function HostAnalysis() {
         enabled: false
       },
       xaxis: {
-        categories: [],
+        categories: service,
       }
     }
   });
@@ -78,9 +104,8 @@ function HostAnalysis() {
     }
   });
 
-
   const [state4, setState4] = useState({
-    series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1,Math.floor(Math.random() * 100) + 1],
+    series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1],
     options: {
       chart: {
         width: 380,
@@ -102,10 +127,6 @@ function HostAnalysis() {
   });
 
   useEffect(() => {
-    HostServices();
-  }, []);
-
-  useEffect(() => {
     setState2(prevState => ({
       ...prevState,
       options: {
@@ -118,21 +139,6 @@ function HostAnalysis() {
     }));
   }, [service]);
 
-  const HostServices = async () => {
-    try {
-      const cookie = new Cookies();
-      const NGOName = cookie.get("NGOName");
-      const response = await axios.get("http://localhost:3001/getServices", {
-        params: { NGOName }
-      });
-      if (response.data.success) {
-        setService(response.data.services);
-        console.log(response.data.services);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleDistrictChange = async (event) => {
     try {
@@ -141,45 +147,49 @@ function HostAnalysis() {
         options: state3.options
       });
       setState4({
-        series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1,Math.floor(Math.random() * 100) + 1],
+        series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1],
         options: state4.options
       });
-    }catch(err){
-        console.log(err);
+    } catch (err) {
+      console.log(err);
     }
   };
 
   const handleAnalysisTypeChange = (type) => {
     setAnalysisType(type);
+    if (type === "Host") {
+      fetchData(); 
+    }
   };
 
   return (
     <div>
       <Header />
+      
       <div>
-        <button onClick={() => handleAnalysisTypeChange("Host")}>Host Analysis</button>&nbsp;
-        <button onClick={() => handleAnalysisTypeChange("Overall")}>Overall Analysis</button>
+        <button onClick={() => handleAnalysisTypeChange("Host")} style={{padding : "10px 10px 10px 10px", backgroundColor : "#4d82e2", color : "white", fontWeight : "bolder", borderRadius : "10px"}}>Host Analysis</button>&nbsp;
+        <button onClick={() => handleAnalysisTypeChange("Overall")} style={{padding : "10px 10px 10px 10px", backgroundColor : "#4d82e2", color : "white", fontWeight : "bolder", borderRadius : "10px"}}>Overall Analysis</button>
       </div>
       {analysisType === "Host" && (
         <div className="HostAnalysis">
           <div><h1>Host Analysis</h1></div>
-          <div style={{display : "flex", gap : "10%", justifyContent : "center", alignItems : "center", flexWrap : "wrap"}}>
+          <div style={{ display: "flex", gap: "10%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
             <ReactApexChart options={state1.options} series={state1.series} type="pie" width={380} />
-            <ReactApexChart options={state2.options} series={state2.series} type="bar" height={350} style={{height : "20%", width : "40%"}} />
+            <ReactApexChart options={state2.options} series={state2.series} type="bar" height={350} style={{ height: "20%", width: "40%" }} />
           </div>
         </div>
       )}
 
       {analysisType === "Overall" && (
-        <div style={{display : "block", marginTop :"3%", margin : "3% auto 0 auto"}}>
-          <div style={{display : "flex", gap : "30px", flexwrap : "wrap", justifyContent : "center", alignItems : "center"}}>
+        <div style={{ display: "block", marginTop: "3%", margin: "3% auto 0 auto" }}>
+          <div style={{ display: "flex", gap: "30px", flexwrap: "wrap", justifyContent: "center", alignItems: "center" }}>
             <div className="HostAnalysis">
               <div><h1>Overall Analysis</h1></div>
-              <div style={{display : "flex", gap : "10%", justifyContent : "center", alignItems : "center", flexWrap : "wrap"}}>
+              <div style={{ display: "flex", gap: "10%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
                 <ReactApexChart options={state3.options} series={state3.series} type="pie" width={380} />
                 <ReactApexChart options={state4.options} series={state4.series} type="pie" width={380} />
-                <div style={{marginBottom : "20px"}}>
-                  <select name="Area" id="Area6" style={{width : "100%", padding : "10px 10px 10px 10px", borderRadius : "10px", backgroundColor : "trans" }} onChange={handleDistrictChange}>
+                <div style={{ marginBottom: "20px", marginTop : "50px" }}>
+                  <select name="Area" id="Area6" style={{ width: "100%", padding: "10px 10px 10px 10px", borderRadius: "10px", backgroundColor: "trans" }} onChange={handleDistrictChange}>
                     <option value="Ariyalur">Ariyalur</option>
                     <option value="Chennai">Chennai</option>
                     <option value="Coimbatore">Coimbatore</option>
@@ -229,78 +239,13 @@ function HostAnalysis() {
                   <div class="col col-2">Service</div>
                   <div class="col col-3">Percentage</div>
                 </li>
-                <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">1</div>
-                    <div class="col col-2" data-label="Customer Name">Humanitarian</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">2</div>
-                    <div class="col col-2" data-label="Customer Name">Healthcare</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">3</div>
-                    <div class="col col-2" data-label="Customer Name">Education</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">4</div>
-                    <div class="col col-2" data-label="Customer Name">Environmental</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">5</div>
-                    <div class="col col-2" data-label="Customer Name">Community</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">6</div>
-                    <div class="col col-2" data-label="Customer Name">Human Rights</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">7</div>
-                    <div class="col col-2" data-label="Customer Name">Empowerment Programs</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">8</div>
-                    <div class="col col-2" data-label="Customer Name">Disaster Preparedness </div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">9</div>
-                    <div class="col col-2" data-label="Customer Name">Research and Policy Advocacy</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">10</div>
-                    <div class="col col-2" data-label="Customer Name">Crisis Intervention</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">11</div>
-                    <div class="col col-2" data-label="Customer Name">Awareness Campaigns </div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
-                    <li class="table-row">
-                    <div class="col col-1" data-label="Job Id">12</div>
-                    <div class="col col-2" data-label="Customer Name">Conflict Resolution</div>
-                    <div class="col col-3" data-label="Amount">{Math.floor(Math.random() * 100) + 1}</div>
-                    
-                    </li>
+                {service.map((item, index) => (
+                  <li key={index} class="table-row">
+                    <div class="col col-1" data-label="S.No">{index + 1}</div>
+                    <div class="col col-2" data-label="Service">{item.name}</div>
+                    <div class="col col-3" data-label="Percentage">{item.percentage}</div>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

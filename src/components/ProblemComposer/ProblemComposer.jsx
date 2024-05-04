@@ -11,10 +11,17 @@ import UploadImage from "../../img/upload.svg";
 import { useState } from "react";
 import axios from "axios";
 import { Cookies } from "react-cookie";
+import {Cloudinary} from "@cloudinary/url-gen";
+
 const cookie = new Cookies();
 
+const CLOUD_NAME = "djck5oo7x";
+const UPLOAD_PRESET = "CHECK2";
 
 function ProblemComposer(){
+    const cld = new Cloudinary({cloud: {cloudName: 'djck5oo7x'}});  
+    
+    
     const [file, setFile] = useState(null);
     const username = cookie.get("Username");
     async function handleProblems(){
@@ -31,7 +38,7 @@ function ProblemComposer(){
         await axios({
             url : "http://localhost:3001/storeComposedProblems",
             method : "get",
-            params : {ProblemHeading, area, service, user, description, filename, ProblemStatus}
+            params : {ProblemHeading, area, service, user, description, file, ProblemStatus}
         }).then((res => {
             if (res.data.success) {
                 // alert("data stored successfully")
@@ -41,6 +48,30 @@ function ProblemComposer(){
             console.log("error reason : ",err.message)
         })
         
+    }
+
+    const handleFile = async (e) => {
+
+        const formData = new FormData();
+        formData.append("file", e.target.files[0]);
+        formData.append("cloud_name", CLOUD_NAME);
+        formData.append("upload_preset", UPLOAD_PRESET);
+        try {
+        const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`,
+            {
+              method: "POST",
+              body: formData
+            },
+          );
+          console.log("success")
+          alert("image uploaded successfully");
+          const data = await response.json()
+          setFile(data.url)
+        } catch (err) {
+            console.log("Console : ", err.message)
+            alert("error in uploading image")
+        }
     }
 
     return (
@@ -131,7 +162,7 @@ function ProblemComposer(){
                                 id="fileInput"
                                 accept="image/*"
                                 style={{ display: "none" }} 
-                                onChange={(e) => setFile(e.target.files[0])}
+                                onChange={handleFile}
                             />
                         </div>
                         <button onClick={handleProblems} style = {{backgroundColor : "#4d84e2", color : "white"}} className="btn solid">Submit Problem</button>

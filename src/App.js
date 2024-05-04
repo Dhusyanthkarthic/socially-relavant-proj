@@ -14,12 +14,24 @@ import CompletedProblems from "./components/ProblemStatus/CompletedStatus";
 import HostAnalysis from "./components/HostAnalysisPage/HostAnalysisPage";
 import AboutUs from "./components/AboutUs/AboutUs";
 import UserAnalysis from "./components/UserAnalysis/UserAnalysis";
-import UserProfile from "./components/UserProfilePage/UserProfile";
+// import UserProfile from "./components/UserProfilePage/UserProfile";
 import PrivacyPolicy from "./components/PrivacyPolicy/PandP";
 import TermsConditions from "./components/TermsandConditions/TandC";
 import HostAboutUs from "./components/AboutUsHost/AboutUsHost";
 import HostProfile from "./components/HostProfile/HostProfile";
-
+import HostGeneral from "./components/HostProfile/General";
+import HostHeader from "./components/HostProfile/changePassword";
+import HostInfoProfile from "./components/HostProfile/info";
+import HostContactDetails from "./components/HostProfile/ContactDetails";
+import ProblemContainer from "./components/UserProblemDisplay/problemContainer";
+import HostMessaging from "./components/HostMessaging/HostMessaging";
+import MessageContainer from "./components/HostMessaging/MessageContainer";
+import UserMessageContainer from './components/UserMessaging/UserMessageContainer';
+import UserMessaging from './components/UserMessaging/UserMessaging';
+import UserProfile from "./components/UserProfile/UserProfile";
+import UserProfileChange from "./components/UserProfile/UserPasswordChange";
+import UserInfo from './components/UserProfile/UserInfo';
+import UserContactDetails from "./components/UserProfile/UserContactDetails";
 
 import {
   createBrowserRouter,
@@ -111,6 +123,58 @@ const router = createBrowserRouter([
   {
     path : "/HostProfile",
     element : <HostProfile />
+  },
+  {
+    path : "/HostGeneral",
+    element : <HostGeneral />
+  },
+  {
+    path : "/HostChangePassword",
+    element : <HostHeader />
+  },
+  {
+    path : "/HostInfo",
+    element : <HostInfoProfile />
+  },
+  {
+    path : "/ContactDetails",
+    element : <HostContactDetails />
+  },
+  {
+    path : "/ProblemContainer",
+    element : <ProblemContainer />
+  },
+  {
+    path : "/HostMessaging",
+    element : <HostMessaging />
+  },
+  {
+    path : "/MessageContainer",
+    element : <MessageContainer />
+  },
+  {
+    path : "/UserMessaging",
+    element : <UserMessaging />
+  },
+  {
+    path : "/UserMessageContainer",
+    element : <UserMessageContainer />
+  },
+  {
+    path : "/UserProfile",
+    element : <UserProfile />
+  },
+  {
+    path : "/UserProfileChange",
+    element : <UserProfileChange/>
+  },
+  {
+    path : "/UserInfo",
+    element : <UserInfo />
+  },
+  {
+    path : "/UserContactDetails",
+    element : <UserContactDetails />
   }
 ]);
 

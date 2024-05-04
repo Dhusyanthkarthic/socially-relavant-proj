@@ -1,11 +1,11 @@
 import React from "react";
 import "./HostProfile.css";
-import ProfileHeader from "../"
+import Header from "../HostProfile/HostProfileHeader";
 
-function HomeFrontPage{
+function HomeFrontPage(){
     return(
         <div>
-
+            <Header />
         </div>
     );
 }

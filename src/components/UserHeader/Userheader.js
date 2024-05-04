@@ -50,13 +50,13 @@ const Navbar = () => {
         </div>
       </a>
       <div className="navbar-links-container">
-        <a href="">Messages</a>
+        <a href="/UserMessaging">Messages</a>
         <a href="./problemcomposer">Composer</a>
         <a href="/composedproblems">Composed</a>
         <a href="/UserAnalysis">Analysis</a>
         <a href="/AboutUs">About Us</a>
         
-        <a href="/UserProfilePage"><button className="primary-button">
+        <a href="/UserProfile"><button className="primary-button">
           <div><img src={User} alt="user" height="18px" width = "18px" /></div>
           <div>{username}</div>
         </button></a>

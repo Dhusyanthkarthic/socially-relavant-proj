@@ -7,6 +7,7 @@ import Logo from "../../img/Logo.png";
 function HostHeader() {
     const cookie = new Cookies();
     const NGOName = cookie.get("NGOname");
+    console.log(NGOName);
     return (
         <div className="HostHeaderContainer">
             <div className="HostHeaderTitle">
@@ -16,9 +17,9 @@ function HostHeader() {
                 </a>
             </div>
             <div className="HostHeaderNavigator">
-                {/* <div>
-                    <a href="#" style={{textDecoration : "none", color : "black"}} ><p>Dashboard</p></a>
-                </div> */}
+                <div>
+                    <a href="/HostMessaging" style={{textDecoration : "none", color : "black"}} ><p>Messaging</p></a>
+                </div>
                 <div>
                     <a href="./hostfeed" style={{textDecoration : "none", color : "black"}} ><p>Problems</p></a>
                 </div>
@@ -36,11 +37,13 @@ function HostHeader() {
                     <a href="#" style={{textDecoration : "none", color : "black"}} ><p>Profile</p></a>
                 </div> */}
             </div>
-            <a href="/UserProfilePage" style={{textDecoration : "none", color : "black"}}><div className="HostHeaderName">
+            <a href="/HostProfile" style={{textDecoration : "none", color : "black"}}><div className="HostHeaderName">
                 <p>{NGOName}</p>
             </div></a>
             <div>
-                <button className="HostDocumentation">Profile</button>
+                <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fnature%2F&psig=AOvVaw06NFBBMIv2G-VqrO65ig63&ust=1714934966920000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCICQm93U9IUDFQAAAAAdAAAAABAE" download="Documentation">
+                    <button className="HostDocumentation">Profile</button>
+                </a>
             </div>
         </div>
     );

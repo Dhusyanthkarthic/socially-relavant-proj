@@ -1,8 +1,21 @@
 const express = require("express")
 const app = express()
+const { createServer } = require("http");
 const cors = require("cors")
 app.use(cors())
 const mongoose = require("mongoose")
+const { Server } = require('socket.io');
+
+
+const server = createServer(app);
+const io = new Server(4000, {
+    cors: [
+        {
+            origin:"http://localhost:3000",
+            methods:["GET","POST"]
+        }
+    ]
+});
 
 
 mongoose.connect("mongodb+srv://hari:hari@srp.b8rbbv3.mongodb.net/?retryWrites=true&w=majority&appName=srp")
@@ -12,6 +25,20 @@ mongoose.connect("mongodb+srv://hari:hari@srp.b8rbbv3.mongodb.net/?retryWrites=t
 .catch((err) => {
     console.log("Error : ", err)
 })
+
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on("JOIN_ROOM", (roomid) => {
+        socket.join(roomid);
+    })
+
+    socket.on("send", ({msg, user, roomid}) => {
+        console.log("received", msg)
+        io.to(roomid).emit("receive", {msg,user})
+    })
+
+});
 
 const UserDetails = new mongoose.Schema({
     Firstname : {
@@ -275,9 +302,11 @@ app.get("/getUserName", async (req, res) => {
 
 
 app.get("/getServices", async (req, res) => {
-    var name = req.query.NGOname;
+    var ngoname = req.query.NGOname;
+    // var name = "Growmore";
+    console.log( "NGoname  : " + ngoname);
     try {
-        const HostDetails = await collection.findOne({ NGOName: name });
+        const HostDetails = await collection.findOne({ NGOName: ngoname });
 
         if (HostDetails) {
             console.log("Services Data");
@@ -289,7 +318,7 @@ app.get("/getServices", async (req, res) => {
                 HostDetails.services5,
                 HostDetails.services6
             ];
-
+            console.log(services);
             res.json({ services, success: true });
         } else {
             res.status(404).json({ error: "No host details found for the provided NGO name" });
@@ -299,8 +328,6 @@ app.get("/getServices", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch host details" });
     }
 });
-
-
 
 
 
@@ -344,7 +371,7 @@ const ProblemsComposed = new mongoose.Schema({
         type : String,
         required : true
     },
-    filename : {
+    file_url : {
         type : String,
         required : true
     },
@@ -370,12 +397,12 @@ app.get("/storeComposedProblems" , async (req, res) => {
     var service = req.query.service;
     var user  = req.query.user;
     var description = req.query.description;
-    var filename = req.query.filename;
+    var file_url = req.query.file;
     var ProblemStatus = req.query.ProblemStatus;
     var HostStatus = "none";
     var NGOName = "none";
 
-    const Problem = new ProblemCollection({ProblemHeading : ProblemHeading, area : area, service : service, user : user, description : description, filename : filename, ProblemStatus : ProblemStatus, HostStatus : HostStatus, NGOName : NGOName });
+    const Problem = new ProblemCollection({ProblemHeading : ProblemHeading, area : area, service : service, user : user, description : description, file_url , ProblemStatus : ProblemStatus, HostStatus : HostStatus, NGOName : NGOName });
     await Problem.save()
     res.json({success: true})
 })
@@ -393,6 +420,29 @@ app.post("/acceptProblem", async (req, res) => {
         problem.HostStatus = "Accept";
         problem.ProblemStatus = "pending";
         problem.NGOName = NGOName;
+
+        await problem.save();
+
+        res.status(200).json({ success: true, message: "Problem accepted successfully" });
+    } catch (err) {
+        console.error("Error:", err);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
+
+app.post("/problemNotSatisfied", async (req, res) => {
+    const problemId = req.query.problemId;
+    const username = req.query.username;
+
+    try {
+        const problem = await ProblemCollection.findById(problemId);
+        if (!problem) {
+            return res.status(404).json({ success: false, message: "Problem not found" });
+        }
+
+        problem.HostStatus = "none";
+        problem.ProblemStatus = "0";
+        problem.NGOName = "none";
 
         await problem.save();
 
@@ -437,6 +487,31 @@ app.get("/getPendingProblems", async (req, res) => {
       res.status(500).json({ error: "Failed to fetch pending problems" });
     }
 });
+
+
+app.get("/getPendingProblemsNGO", async (req, res) => {
+    const NGOName = req.query.NGOname;
+    try {
+      const pendingProblems = await ProblemCollection.find({ ProblemStatus: { $ne : "0"} , NGOName : NGOName});
+      res.json(pendingProblems);
+    } catch (error) {
+      console.error("Error fetching pending problems:", error);
+      res.status(500).json({ error: "Failed to fetch pending problems" });
+    }
+});
+
+app.get("/getPendingProblemsUser", async (req, res) => {
+    const username = req.query.username;
+    try {
+      const pendingProblems = await ProblemCollection.find({ ProblemStatus: { $ne: "0" } , user : username});
+      res.json(pendingProblems);
+    } catch (error) {
+      console.error("Error fetching pending problems:", error);
+      res.status(500).json({ error: "Failed to fetch pending problems" });
+    }
+});
+
+
 
 app.get("/getUserComposedProblems", async (req, res) => {
     const user = req.query.user;
@@ -509,6 +584,50 @@ app.get("/getHostCompletedProblems", async (req, res) => {
         console.log("Backend Error : " + error);
     }
 });
+
+app.get("/getHostDetails", async (req, res) => {
+    const NGOName = req.query.NGOName;
+    try{
+        const data = await collection.find({ NGOName });
+        console.log(data);
+        res.json(data);
+    }catch(error){
+        console.log("Backend Error : " + error);
+    }
+});
+
+app.get("/getUserDetails", async (req, res) => {
+    const Firstname = req.query.firstname;
+    try{
+        const data = await collection1.find({ Firstname });
+        console.log(data);
+        res.json(data);
+    }catch(error){
+        console.log("Backend Error : " + error);
+    }
+});
+
+
+app.get("/changeUserGeneral", async (req, res) => {
+    const Firstname = req.query.firstname;
+    const firstname = req.query.Firstname;
+    const lastname = req.query.lastname;
+    const DOB = req.query.DOB;
+    try{
+        const data = await collection1.find({ Firstname });
+        console.log(data);
+        data.Firstname = firstname;
+        data.Lastname = lastname;
+        data.DOB = DOB;
+        await data.save();
+        res.json(data);
+    }catch(error){
+        console.log("Backend Error : " + error);
+    }
+});
+
+
+
 
 app.get("/getProblemDetails", async (req, res) => {
     const { problemHeading } = req.query;

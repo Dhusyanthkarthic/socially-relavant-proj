@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Problems.css";
 import Location from "../../img/location.svg";
 import Services from "../../img/service.svg";
+import Service from "../../img/service.svg";
+import Image from "../../img/ngo-images.jpg";
 import UserProfile from "../../img/userProfile.svg";
 import Ngo from "../../img/ngo.svg";
 import { Link } from "react-router-dom";
@@ -72,6 +74,7 @@ function Problems() {
       });
       console.log(username);
       if (response.data) {
+        console.log(response.data)
         setCompletedProblems(response.data);
       } else {
           console.log("No pending problems found");
@@ -86,6 +89,36 @@ function Problems() {
     setCookie("ProblemHeading", heading);
   };
 
+  const renderDescription = (description) => {
+    const words = description.split(" ");
+    if (words.length > 10) {
+      return (
+        <>
+          {words.slice(0, 10).join(" ")} ... <span style={{ color: "blue" }}>Read more</span>
+        </>
+      );
+    }
+    return description;
+  };
+
+  const acceptProblem = async (problemId) => {
+    const cookie = new Cookies();
+    const NGOname = cookie.get("NGOname");
+    const username = cookie.get("Username");
+    await axios({
+        url: `http://localhost:3001/problemNotSatisfied?problemId=${problemId}&NGOname=${username}`,
+        method: "post"
+    }).then((res => {
+        if (res.data.success) {
+            
+        }
+    })).catch(err => {
+        console.log("error reason : ", err.message)
+    })
+};
+
+  
+
   return (
     <div>
       <div className="PendingProblems">
@@ -99,60 +132,35 @@ function Problems() {
                 to={{
                   pathname: "/problemdescription",
                 }}
-                className="problem-container"
+                // className="problem-container"
                 style={{ textDecoration: "none", color: "black" }}
                 key={index}
               >
-                <div key={index}>
-                  <div style={{ lineHeight: "0.8" }}>
-                    <div className="Pending">
-                      <h2 style={{color : "white"}}>{problem.ProblemHeading}</h2>
-                    </div>
-                    {/* <div className="problemDescription">
-                    <p>{problem.description}</p>
-                    </div> */}
+                <div className="ExProblemContainer" style={{marginTop : "50px"}}>
+                  <div style={{marginBottom : "20px"}}>
+                      <img src={problem.file_url} alt="Problem Image" width = "200px" height = "200px"/>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "20px",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <div className="problemLocation">
-                      <div>
-                        <img
-                          src={Location}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{color : "white"}}>{problem.area}</div>
-                    </div>
-                    <div className="problemServices">
-                      <div>
-                        <img
-                          src={Services}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{color : "white"}}>{problem.service}</div>
-                    </div>
+                  <div style={{textAlign : "left", display : "flex", gap : "10px", alignItems : "center", flexWrap : "wrap"}}>
+                     <div><p style={{fontWeight : "bolder"}}>Heading :</p></div>
+                     <div>{problem.ProblemHeading}</div>
                   </div>
-                  <div className="user-info">
-                    <div className="UserInfo">
-                      <div>
-                        <img
-                          src={UserProfile}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{ fontSize: "24px" }}>{problem.user}</div>
-                    </div>
+                  <div style={{textAlign : "left"}}>
+                    <div style={{fontWeight : "bolder"}}>Description : </div>
+                    <div>{renderDescription(problem.description)}</div>
                   </div>
-                </div>
+                  <div style={{display : "flex", gap : "10px", alignItems : "center", flexWrap : "wrap"}}>
+                      <div style={{display : "flex", gap : "10px", alignItems : "center", }}>
+                          <div><img src={Location} alt="Images" width = "15px" height = ""/></div>
+                          <div><p>{problem.area}</p></div>
+                      </div>
+                      <div style={{display : "flex", gap : "10px", alignItems : "center" }}>
+                          <div style={{display : "flex", gap : "10px", alignItems : "center", }}>
+                              <div><img src={Service} alt="Images" width = "20px" height = "20px"/></div>
+                              <div><p>{problem.service}</p></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               </Link>
             ))}
           </div>
@@ -167,63 +175,43 @@ function Problems() {
                 to={{
                   pathname: "/problemdescription",
                 }}
-                className="problem-container"
+                // className="problem-container"
                 style={{ textDecoration: "none", color: "black" }}
                 key={index}
                 onClick={() => handleClick(problem.ProblemHeading)} // Pass the problem heading to the handleClick function
               >
-                <div key={index}>
-                  <div style={{ lineHeight: "0.8" }}>
-                    <div className="Pending">
-                      <h2 style={{color : "white"}}>{problem.ProblemHeading}</h2>
+                <div className="ExProblemContainer" style={{marginTop : "50px"}}>
+                    <div style={{marginBottom : "20px"}}>
+                        <img src={problem.file_url} alt="Problem Image" width = "200px" height = "200px"/>
                     </div>
-                    {/* <div className="problemDescription">
-                    <p>{problem.description}</p>
-                    </div> */}
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "20px",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <div className="problemLocation">
-                      <div>
-                        <img
-                          src={Location}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{color : "white"}}>{problem.area}</div>
+                    <div style={{textAlign : "left", display : "flex", gap : "10px", alignItems : "center", flexWrap : "wrap"}}>
+                      <div><p style={{fontWeight : "bolder"}}>Heading :</p></div>
+                      <div>{problem.ProblemHeading}</div>
                     </div>
-                    <div className="problemServices">
-                      <div>
-                        <img
-                          src={Services}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{color : "white"}}>{problem.service}</div>
+                    <div style={{textAlign : "left"}}>
+                      <div style={{fontWeight : "bolder"}}>Description : </div>
+                      <div>{renderDescription(problem.description)}</div>
                     </div>
-                  </div>
-                  <div className="user-info">
-                    <div className="UserInfo">
-                      <div>
-                        <img
-                          src={UserProfile}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{display : "flex", gap : "10px", flexWrap : "wrap", alignItems: "center", justifyContent : "center"}}>
-                        <div style={{ fontSize: "24px", color : "white" }}>{problem.user}</div>
-                        <div style={{fontSize : "24px", color : "white"}}><img src={Ngo} alt="ngo" width = "20px" height = "20px"  style={{marginRight : "5px"}}/>{problem.NGOName}</div>
-                      </div>
+                    <div style={{display : "flex", gap : "10px", alignItems : "center"}}>
+                        <div style={{display : "flex", gap : "10px", alignItems : "center", }}>
+                            <div><img src={Location} alt="Images" width = "15px" height = "15px"/></div>
+                            <div><p>{problem.area}</p></div>
+                        </div>
+                        <div style={{display : "flex", gap : "10px", alignItems : "center", }}>
+                            <div style={{display : "flex", gap : "10px", alignItems : "center", }}>
+                                <div><img src={Service} alt="Images" width = "20px" height = "20px"/></div>
+                                <div><p>{problem.service}</p></div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
+                    <div style={{display : "flex", gap : "10px", alignItems : "center"}}>
+                        <div style={{ borderRadius : "10px", backgroundColor : "rgb(77, 130, 226)", color : "white"}}>
+                            <p style={{marginLeft : "10px", marginRight : "10px"}}>{problem.user}</p>        
+                        </div>
+                        <div style={{ borderRadius : "10px", backgroundColor : "rgb(77, 130, 226)", color : "white"}}>
+                            <p style={{marginLeft : "10px", marginRight : "10px"}}>{problem.NGOName}</p>
+                        </div>
+                    </div>
                 </div>
               </Link>
             ))}
@@ -239,64 +227,51 @@ function Problems() {
                 to={{
                   pathname: "/problemdescription",
                 }}
-                className="problem-container"
+                // className="problem-container"
                 style={{ textDecoration: "none", color: "black" }}
                 key={index}
                 onClick={() => handleClick(problem.ProblemHeading)} // Pass the problem heading to the handleClick function
               >
-                <div key={index}>
-                  <div style={{ lineHeight: "0.8" }}>
-                    <div className="Pending">
-                      <h2 style={{color : "white"}}>{problem.ProblemHeading}</h2>
-                    </div>
-                    {/* <div className="problemDescription">
-                    <p>{problem.description}</p>
-                    </div> */}
+                <div className="ExProblemContainer" style={{marginTop : "50px"}}>
+                  <div style={{marginBottom : "20px"}}>
+                      <img src={problem.file_url} alt="Problem Image" width = "200px" height = "200px"/>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "20px",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <div className="problemLocation">
-                      <div>
-                        <img
-                          src={Location}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{color : "white"}}>{problem.area}</div>
-                    </div>
-                    <div className="problemServices">
-                      <div>
-                        <img
-                          src={Services}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{color : "white"}}>{problem.service}</div>
-                    </div>
+                  <div style={{textAlign : "left", display : "flex", gap : "10px", alignItems : "center", flexWrap : "wrap"}}>
+                     <div><p style={{fontWeight : "bolder"}}>Heading :</p></div>
+                     <div>{problem.ProblemHeading}</div>
                   </div>
-                  <div className="user-info">
-                    <div className="UserInfo">
-                      <div>
-                        <img
-                          src={UserProfile}
-                          alt="Location"
-                          style={{ height: "23px", width: "23px" }}
-                        />
-                      </div>
-                      <div style={{display : "flex", gap : "10px", flexWrap : "wrap", alignItems: "center", justifyContent : "center"}}>
-                        <div style={{ fontSize: "24px", color : "white" }}>{problem.user}</div>
-                        <div style={{fontSize : "24px", color : "white"}}><img src={Ngo} alt="ngo" width = "20px" height = "20px"  style={{marginRight : "5px"}}/>{problem.NGOName}</div>
-                      </div>
-                    </div>
+                  <div style={{textAlign : "left"}}>
+                    <div style={{fontWeight : "bolder"}}>Description : </div>
+                    <div>{renderDescription(problem.description)}</div>
                   </div>
-                </div>
+                  <div style={{display : "flex", gap : "10px", alignItems : "center"}}>
+                      <div style={{display : "flex", gap : "10px", alignItems : "center", }}>
+                          <div><img src={Location} alt="Images" width = "15px" height = "15px"/></div>
+                          <div><p>{problem.area}</p></div>
+                      </div>
+                      <div style={{display : "flex", gap : "10px", alignItems : "center", }}>
+                          <div style={{display : "flex", gap : "10px", alignItems : "center", }}>
+                              <div><img src={Service} alt="Images" width = "20px" height = "20px"/></div>
+                              <div><p>{problem.service}</p></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div style={{display : "flex", gap : "10px", alignItems : "center"}}>
+                      <div style={{ borderRadius : "10px", backgroundColor : "rgb(77, 130, 226)", color : "white"}}>
+                          <p style={{marginLeft : "10px", marginRight : "10px"}}>{problem.user}</p>        
+                      </div>
+                      <div style={{ borderRadius : "10px", backgroundColor : "rgb(77, 130, 226)", color : "white"}}>
+                          <p style={{marginLeft : "10px", marginRight : "10px"}}>{problem.NGOName}</p>
+                      </div>
+                  </div>
+                  <div>
+                      <button onClick={() => acceptProblem(problem._id)} style={{ borderRadius : "10px", border : "transparent", fontWeight : "bolder" ,backgroundColor : "rgb(77, 130, 226)", color : "white", marginTop : "10px", outline : "none"}}>
+                        <div>
+                            <p style={{marginLeft : "10px", marginRight : "10px"}}>Not Satisfied</p>        
+                        </div>
+                      </button>
+                  </div>
+              </div>
               </Link>
             ))}
           </div>

@@ -8,6 +8,30 @@ import axios from "axios";
 function HostAnalysis() {
   const [service, setService] = useState([]);
   const [analysisType, setAnalysisType] = useState("Overall");
+  const [problems, setProblems] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const cookie = new Cookies();
+    const NGOname = cookie.get("NGOname");
+    console.log("NGOname : " + NGOname);
+    try {
+        const response = await axios.get("http://localhost:3001/getServices", {
+        params: { NGOname }
+      });
+      console.log("Response data" + response.data);
+      if (response.data) {
+        setService(response.data.services);
+      } else {
+        console.log("No pending problems found");
+      }
+    } catch (err) {
+      console.log(err + "error message");
+    }
+  };
 
   const [state1, setState1] = useState({
     series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1],
@@ -51,7 +75,7 @@ function HostAnalysis() {
         enabled: false
       },
       xaxis: {
-        categories: [],
+        categories: service,
       }
     }
   });
@@ -78,9 +102,8 @@ function HostAnalysis() {
     }
   });
 
-
   const [state4, setState4] = useState({
-    series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1,Math.floor(Math.random() * 100) + 1],
+    series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1],
     options: {
       chart: {
         width: 380,
@@ -102,10 +125,6 @@ function HostAnalysis() {
   });
 
   useEffect(() => {
-    HostServices();
-  }, []);
-
-  useEffect(() => {
     setState2(prevState => ({
       ...prevState,
       options: {
@@ -118,21 +137,6 @@ function HostAnalysis() {
     }));
   }, [service]);
 
-  const HostServices = async () => {
-    try {
-      const cookie = new Cookies();
-      const NGOName = cookie.get("NGOName");
-      const response = await axios.get("http://localhost:3001/getServices", {
-        params: { NGOName }
-      });
-      if (response.data.success) {
-        setService(response.data.services);
-        console.log(response.data.services);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleDistrictChange = async (event) => {
     try {
@@ -141,45 +145,49 @@ function HostAnalysis() {
         options: state3.options
       });
       setState4({
-        series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1,Math.floor(Math.random() * 100) + 1],
+        series: [Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1, Math.floor(Math.random() * 100) + 1],
         options: state4.options
       });
-    }catch(err){
-        console.log(err);
+    } catch (err) {
+      console.log(err);
     }
   };
 
   const handleAnalysisTypeChange = (type) => {
     setAnalysisType(type);
+    if (type === "Host") {
+      fetchData(); 
+    }
   };
 
   return (
     <div>
       <Header />
+      
       <div>
-        <button onClick={() => handleAnalysisTypeChange("Host")}>Host Analysis</button>&nbsp;
-        <button onClick={() => handleAnalysisTypeChange("Overall")}>Overall Analysis</button>
+        <button onClick={() => handleAnalysisTypeChange("Host")} style={{padding : "10px 10px 10px 10px", backgroundColor : "#4d82e2", color : "white", fontWeight : "bolder", borderRadius : "10px", border : "tranparent", outline : "none"}}>Host Analysis</button>&nbsp;
+        <button onClick={() => handleAnalysisTypeChange("Overall")} style={{padding : "10px 10px 10px 10px", backgroundColor : "#4d82e2", color : "white", fontWeight : "bolder", borderRadius : "10px", border : "transparent", outline : "none"}}>Overall Analysis</button>
       </div>
       {analysisType === "Host" && (
         <div className="HostAnalysis">
           <div><h1>Host Analysis</h1></div>
-          <div style={{display : "flex", gap : "10%", justifyContent : "center", alignItems : "center", flexWrap : "wrap"}}>
+          <div style={{ display: "flex", gap: "10%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
             <ReactApexChart options={state1.options} series={state1.series} type="pie" width={380} />
-            <ReactApexChart options={state2.options} series={state2.series} type="bar" height={350} style={{height : "20%", width : "40%"}} />
+            <ReactApexChart options={state2.options} series={state2.series} type="bar" height={350} style={{ height: "20%", width: "40%" }} />
           </div>
         </div>
       )}
 
       {analysisType === "Overall" && (
-        <div style={{display : "block", marginTop :"3%", margin : "3% auto 0 auto"}}>
-          <div style={{display : "flex", gap : "30px", flexwrap : "wrap", justifyContent : "center", alignItems : "center"}}>
+        <div style={{ display: "block", marginTop: "3%", margin: "3% auto 0 auto" }}>
+          <div style={{ display: "flex", gap: "30px", flexwrap: "wrap", justifyContent: "center", alignItems: "center" }}>
             <div className="HostAnalysis">
               <div><h1>Overall Analysis</h1></div>
-              <div style={{display : "flex", gap : "10%", justifyContent : "center", alignItems : "center", flexWrap : "wrap"}}>
+              <div style={{ display: "flex", gap: "10%", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
                 <ReactApexChart options={state3.options} series={state3.series} type="pie" width={380} />
                 <ReactApexChart options={state4.options} series={state4.series} type="pie" width={380} />
-                <div style={{marginBottom : "20px"}}>
-                  <select name="Area" id="Area6" style={{width : "100%", padding : "10px 10px 10px 10px", borderRadius : "10px", backgroundColor : "trans" }} onChange={handleDistrictChange}>
+                <div style={{ marginBottom: "20px", marginTop : "50px" }}>
+                  <select name="Area" id="Area6" style={{ width: "100%", padding: "10px 10px 10px 10px", borderRadius: "10px", backgroundColor: "trans" }} onChange={handleDistrictChange}>
                     <option value="Ariyalur">Ariyalur</option>
                     <option value="Chennai">Chennai</option>
                     <option value="Coimbatore">Coimbatore</option>
@@ -222,7 +230,7 @@ function HostAnalysis() {
             </div>
           </div>
           <div>
-            <div class="container">
+          <div class="container">
               <ul class="responsive-table">
                 <li class="table-header">
                   <div class="col col-1">S.No</div>

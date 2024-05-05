@@ -165,7 +165,7 @@ function HostAnalysis() {
       <Header />
       
       <div>
-        <button onClick={() => handleAnalysisTypeChange("Host")} style={{padding : "10px 10px 10px 10px", backgroundColor : "#4d82e2", color : "white", fontWeight : "bolder", borderRadius : "10px", border : "tranparent", outline : "none"}}>Host Analysis</button>&nbsp;
+        <button onClick={() => handleAnalysisTypeChange("Host")} style={{padding : "10px 10px 10px 10px", backgroundColor : "#4d82e2", color : "white", fontWeight : "bolder", borderRadius : "10px", border : "transparent", outline : "none"}}>Host Analysis</button>&nbsp;
         <button onClick={() => handleAnalysisTypeChange("Overall")} style={{padding : "10px 10px 10px 10px", backgroundColor : "#4d82e2", color : "white", fontWeight : "bolder", borderRadius : "10px", border : "transparent", outline : "none"}}>Overall Analysis</button>
       </div>
       {analysisType === "Host" && (

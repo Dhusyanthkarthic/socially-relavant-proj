@@ -4,6 +4,8 @@ import Email from "../../img/email.svg";
 import Password from "../../img/password.svg";
 import { Cookies } from "react-cookie";
 import axios from "axios";
+import AboutBackground from "../../Assets/about-background.png";
+import BannerBackground from "../../Assets/home-banner-background.png";
 const cookie = new Cookies();
 
 function Login() {
@@ -121,7 +123,14 @@ function Login() {
         //         <p>Don't have an account ? <a href="/signup">Signup here</a></p>
         //     </div>
         // </div>
+        
         <div className="LoginWrapper">
+            <div className="about-background-image-container">
+                <img src={AboutBackground} alt="" />
+            </div>
+            <div className="home-bannerImage-container">
+                <img src={BannerBackground} alt="" />
+            </div>
             {/* Login Form */}
             <div class="container" id="container">
                 <div class="form-container sign-in">

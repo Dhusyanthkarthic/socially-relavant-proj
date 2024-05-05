@@ -1,4 +1,4 @@
-.DescriptionContainer{
+/* .DescriptionContainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -40,4 +40,62 @@
     text-align: center;
     margin: 0 auto;
     font-weight: 700;
+} */
+
+.ProblemDescription{
+    display : flex;
+    gap : 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.PContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-color: #f0f0f0;
+    margin-top : 30px;
+    margin-bottom : 30px;
+}
+
+.ProblemDetailsContainer{
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
+    width: auto; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    position: relative;
+}
+
+.ProblemDescriptionContainer{
+    margin-top : 30px;
+}
+
+.problemDetails{
+    display : block;
+    text-align: left;
+}
+
+.problemServiceLocation{
+    display : flex;
+    gap : 20px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top : 30px;
+}
+
+.problemServiceContainer{
+    display : flex;
+    gap : 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.problemLocationContainer{
+    display : flex;
+    gap : 10px;
+    justify-content: center;
+    align-items: center ;
 }

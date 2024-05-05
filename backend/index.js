@@ -453,6 +453,22 @@ app.post("/problemNotSatisfied", async (req, res) => {
     }
 });
 
+
+app.get("/getProblem", async (req, res) => {
+    const problemId = req.query.problemId;
+    console.log(problemId);
+    try{
+        const problem = await ProblemCollection.findById( problemId );
+        if (!problem) {
+            return res.status(404).json({ success: false, message: "Problem not found" });
+        }
+        console.log(problem);
+        res.json(problem);
+    }catch(error){
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+})
+
 app.post("/CompletedProblem", async (req, res) => {
     const problemId = req.query.problemId;
     const NGOName = req.query.NGOname;

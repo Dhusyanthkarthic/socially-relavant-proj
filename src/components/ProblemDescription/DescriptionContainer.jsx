@@ -4,11 +4,12 @@ import "./ProblemDescription.css";
 import Location from "../../img/location.svg";
 import Service from "../../img/service.svg";
 import User from "../../img/user.svg";
+import axios from "axios";
 
 function DescriptionContainer() {
   // const [cookies] = useCookies(["ProblemHeading"]);
   // const problemHeading = cookies["ProblemHeading"];
-  // const [problemDetails, setProblemDetails] = useState(null);
+  const [problemDetails, setProblemDetails] = useState([]);
 
   // useEffect(() => {
   //   fetchProblemDetails();
@@ -17,7 +18,7 @@ function DescriptionContainer() {
   // const fetchProblemDetails = async () => {
   //   try {
   //     const response = await fetch(
-  //       `http://localhost:3001/getProblemDetails?problemHeading=${problemHeading}`
+  //       `http://localhost:3001/getProblemDetails?problemHeading`=${problemHeading}`
   //     );
   //     if (response.ok) {
   //       const data = await response.json();
@@ -31,63 +32,59 @@ function DescriptionContainer() {
   // };
 
   // Render problem details if available, otherwise render a loading message
+  const problemId = window.location.href.split("?")[1].split("=")[1].replaceAll("%20"," ");
+
+  useEffect(() => {
+    fetchProblemDetails();
+  }, []);
+
+  const fetchProblemDetails = async () => {
+    try{
+      // const response = await axios (
+      //   `http://localhost:3001/getProblem?problemid=${problemId}`
+      // );
+      const response = await axios.get("http://localhost:3001/getProblem", {
+            params: { problemId }
+      });
+      if(response.data){
+        // const data = await  response.json();
+        console.log(response.data);
+        setProblemDetails(response.data);
+      }else{
+        console.error("Failed to fetch problem details");
+      }
+    }catch(err){
+      console.log(err + "Error in fetching");
+    }
+  }
+
   return (
-    <div className="DescriptionContainer">
-      <div style={{border : "solid 3px black", width : "70%", borderRadius : "20px"}}>
-          <h1 style={{ paddingBottom: "5px" }}>Problem Heading</h1>
-          <div className="DesProblemDetails">
-            <div className="ProblemImages">
-              <h1>Image1</h1>
-            </div>
-            <div className="DesotherDet">
-              <div className="DesLoc">
-                <div style={{ marginLeft: "10px" }}>
-                  <img
-                    src={Location}
-                    alt="Location"
-                    style={{ height: "23px", width: "23px" }}
-                  />
-                </div>
-                <div style={{ marginRight: "10px" }}>
-                  <p style={{ fontSize: "20px", fontWeight: "600" }}>
-                    Erode
-                  </p>
-                </div>
-              </div>
-              <div className="DesLoc">
-                <div style={{ marginLeft: "10px" }}>
-                  <img
-                    src={Service}
-                    alt="Location"
-                    style={{ height: "23px", width: "23px" }}
-                  />
-                </div>
-                <div style={{ marginRight: "10px" }}>
-                  <p style={{ fontSize: "20px", fontWeight: "600" }}>
-                    Education
-                  </p>
-                </div>
-              </div>
-              <div className="DesLoc">
-                <div style={{ marginLeft: "10px" }}>
-                  <img
-                    src={User}
-                    alt="Location"
-                    style={{ height: "23px", width: "23px" }}
-                  />
-                </div>
-                <div style={{ marginRight: "10px" }}>
-                  <p style={{ fontSize: "20px", fontWeight: "600" }}>
-                    Hari
-                  </p>
-                </div>
-              </div>
-            </div>
+    <div className="PContainer">
+      <div className="ProblemDetailsContainer">
+        <div className="ProblemDescription">
+          <div>
+            <img src={problemDetails.file_url} alt ="ProblemImage" width ="400px" height="400px"/>
           </div>
-          <div className="ProblemDescription">
-            <p>Description</p>
+          <div className="problemDetails">
+            <div>
+              <h1>{problemDetails.ProblemHeading}</h1>
+            </div>
+            <div className="ProblemDescriptionContainer">
+              {problemDetails.description}
+            </div>
+            <div className="problemServiceLocation">
+              <div className="problemServiceContainer">
+                <div><img src={Service} alt="service" width="25px" height="25px"/></div>
+                <div>{problemDetails.service}</div>
+              </div>
+              <div className="problemLocationContainer">
+                <div><img src={Location} alt="service" width="20px" height="20px"/></div>
+                <div>{problemDetails.area}</div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
     </div>
   );
 }

@@ -128,11 +128,12 @@ function Problems() {
           </div>
           <div className="ProblemContainers">
             {pendingProblems.map((problem, index) => (
-              <Link
-                to={{
-                  pathname: "/problemdescription",
-                }}
+              <a
+                // to={{
+                //   pathname: "/problemdescription?problemid="+problem._id,
+                // }}
                 // className="problem-container"
+                href={"/problemdescription?problemid="+problem._id}
                 style={{ textDecoration: "none", color: "black" }}
                 key={index}
               >
@@ -161,7 +162,7 @@ function Problems() {
                       </div>
                   </div>
               </div>
-              </Link>
+              </a>
             ))}
           </div>
         </div>
@@ -171,11 +172,12 @@ function Problems() {
           </div>
           <div className="ProblemContainers">
             {problems.map((problem, index) => (
-              <Link
-                to={{
-                  pathname: "/problemdescription",
-                }}
+              <a
+                // to={{
+                //   pathname: "/problemdescription",
+                // }}
                 // className="problem-container"
+                href={"/problemdescription?problemid="+problem._id}
                 style={{ textDecoration: "none", color: "black" }}
                 key={index}
                 onClick={() => handleClick(problem.ProblemHeading)} // Pass the problem heading to the handleClick function
@@ -213,7 +215,7 @@ function Problems() {
                         </div>
                     </div>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
         </div>
@@ -223,11 +225,12 @@ function Problems() {
           </div>
           <div className="ProblemContainers">
             {competedProblems.map((problem, index) => (
-              <Link
-                to={{
-                  pathname: "/problemdescription",
-                }}
+              <a
+                // to={{
+                //   pathname: "/problemdescription",
+                // }}
                 // className="problem-container"
+                href={"/problemdescription?problemid="+problem._id}
                 style={{ textDecoration: "none", color: "black" }}
                 key={index}
                 onClick={() => handleClick(problem.ProblemHeading)} // Pass the problem heading to the handleClick function
@@ -272,7 +275,7 @@ function Problems() {
                       </button>
                   </div>
               </div>
-              </Link>
+              </a>
             ))}
           </div>
         </div>

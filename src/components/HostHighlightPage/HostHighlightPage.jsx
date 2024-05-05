@@ -2,7 +2,6 @@ import React from 'react'
 import Styles from './HostHighlightPage.css'
 import Analysis from "../../img/analysis.svg";
 
-
 function HostHighlightPage(){
     return (
         <div className='HomeHighlightContainer'>

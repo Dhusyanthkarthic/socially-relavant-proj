@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Styles from './hostheader.css';
 import { Cookies } from "react-cookie";
 import Logo from "../../img/Logo.png";
+import AboutBackground from "../../Assets/about-background.png";
+import BannerBackground from "../../Assets/home-banner-background.png";
 
 
 function HostHeader() {
@@ -10,6 +12,12 @@ function HostHeader() {
     console.log(NGOName);
     return (
         <div className="HostHeaderContainer">
+            <div className="about-background-image-container">
+                <img src={AboutBackground} alt="" />
+            </div>
+            <div className="home-bannerImage-container">
+                <img src={BannerBackground} alt="" />
+            </div>
             <div className="HostHeaderTitle">
                 {/* <h1>AidNet</h1> */}
                 <a href="./host" >

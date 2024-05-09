@@ -677,6 +677,6 @@ app.get("/getHostProblems", async (req, res) => {
 
   
 
-app.listen(3001, () => {
+app.listen(3001,'15.206.116.88' () => {
     console.log("Server is listening")
 })

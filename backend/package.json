@@ -4,7 +4,7 @@
   "description": "backend repo ",
   "main": "index.js",
   "scripts": {
-    "build": "npm install react-scripts",
+    "build": "npm run build",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
